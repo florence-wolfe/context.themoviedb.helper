@@ -92,6 +92,8 @@ def run_script(*args, **kwargs):
 
 
 def run_context(info):
+    if info not in ROUTE:
+        return run_script(info)
     dbtype = sys.listitem.getVideoInfoTag().getMediaType()
     params = {k: v() if callable(v) else v for k, v in viewitems(ROUTE.get(info, {}).get(dbtype, {}))}
     if not params:

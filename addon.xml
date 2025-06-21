@@ -2,12 +2,12 @@
 <addon id="context.themoviedb.helper" version="1.1.1" name="TMDbHelper - Additional Context Menu Items" provider-name="jurialmunkey">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="plugin.video.themoviedb.helper" version="4.10.30" />
+        <import addon="plugin.video.themoviedb.helper" version="6.9.5" />
     </requires>
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
             <menu>
-                <label>$ADDON[plugin.video.themoviedb.helper 32145]</label>
+                <label>Manage TMDbHelper...</label>
                 <item library="context.py" args="play_using">
                     <label>$ADDON[plugin.video.themoviedb.helper 32322]</label>
                     <visible>[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]</visible>
@@ -24,14 +24,34 @@
                     <label>$ADDON[plugin.video.themoviedb.helper 32233]</label>
                     <visible>[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]</visible>
                 </item>
-                <item library="context.py" args="manage_artwork">
+                <item library="context.py" args="modify_identifier">
+                    <label>Modify service</label>
+                    <visible>[Skin.HasSetting(TMDbHelper.Service)]</visible>
+                </item>
+                <item library="context.py" args="revoke_trakt">
+                    <label>Trakt logout</label>
+                    <visible>[!String.IsEmpty(Window(Home).Property(TMDbHelper.TraktIsAuth))]</visible>
+                </item>
+                <item library="context.py" args="invalidate_trakt_sync">
+                    <label>Clear sync</label>
+                    <visible>[!String.IsEmpty(Window(Home).Property(TMDbHelper.TraktIsAuth))]</visible>
+                </item>
+                <item library="context.py" args="authenticate_trakt">
+                    <label>Authenticate Trakt</label>
+                    <visible>[String.IsEmpty(Window(Home).Property(TMDbHelper.TraktIsAuth))]</visible>
+                </item>
+                <item library="context.py" args="open_settings">
+                    <label>$LOCALIZE[5]</label>
+                    <visible>True</visible>
+                </item>
+                <!-- <item library="context.py" args="manage_artwork">
                     <label>$ADDON[plugin.video.themoviedb.helper 32222]</label>
                     <visible>[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]</visible>
-                </item>
-                <item library="context.py" args="add_to_library">
+                </item> -->
+                <!-- <item library="context.py" args="add_to_library">
                     <label>$ADDON[plugin.video.themoviedb.helper 32151]</label>
                     <visible>[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]</visible>
-                </item>
+                </item> -->
             </menu>
         </menu>
     </extension>
