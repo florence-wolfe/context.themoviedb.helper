@@ -40,3 +40,8 @@ msgstr ""
 msgctxt "#32004"
 msgid "Authenticate Trakt"
 msgstr ""
+
+#: /addon.xml
+msgctxt "#32005"
+msgid "Modify artwork"
+msgstr ""

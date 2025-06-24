@@ -75,7 +75,7 @@ class ContextMenuBasicTvshow(ContextMenuBasic):
     tmdb_type = 'tv'
 
 
-class ContextMenuBasicEpisode(ContextMenuBasic):
+class ContextMenuBasicSeason(ContextMenuBasic):
     tmdb_type = 'tv'
     year = None
     imdb_id = None
@@ -93,12 +93,14 @@ class ContextMenuBasicEpisode(ContextMenuBasic):
         return sys.listitem.getVideoInfoTag().getSeason()
 
     @cached_property
-    def episode(self):
-        return sys.listitem.getVideoInfoTag().getEpisode()
-
-    @cached_property
     def episode_year(self):
         return sys.listitem.getVideoInfoTag().getYear()
+
+
+class ContextMenuBasicEpisode(ContextMenuBasicSeason):
+    @cached_property
+    def episode(self):
+        return sys.listitem.getVideoInfoTag().getEpisode()
 
 
 class ContextMenuPlayUsing:
@@ -141,6 +143,10 @@ ROUTES = {
     'refresh_details': {
         'base_class': 'ContextMenuBasic',
         'permission': ('movie', 'tvshow', 'episode')
+    },
+    'modify_artwork': {
+        'base_class': 'ContextMenuBasic',
+        'permission': ('movie', 'tvshow', 'season', 'episode')
     },
 }
 
